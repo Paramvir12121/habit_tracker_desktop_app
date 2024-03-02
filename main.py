@@ -21,9 +21,11 @@ app.geometry('400x300')
 
 # Sample tasks (Replace with your actual tasks)
 tasks = [
-    {"id": "1", "name": "Task 1"},
-    {"id": "2", "name": "Task 2"},
-    {"id": "3", "name": "Task 3"},
+    {"id": "1", "name": "Coded Today?"},
+    {"id": "2", "name": "AWS"},
+    {"id": "3", "name": "GCP"},
+    {"id": "4", "name": "Azure"},
+    {"id": "5", "name": "Project" },
 ]
 
 # Creating task list
