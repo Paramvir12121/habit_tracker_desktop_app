@@ -10,6 +10,10 @@ def api_for_id(task_id):
         if task["id"] == task_id:
             print(f"Task ID: {task['id']}, API: {task['api']}")
             return task['api']
+        
+
+def create_new_task(task_id):
+    pass
             
 
 
