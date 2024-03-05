@@ -11,6 +11,7 @@ class TaskManager:
         # Assuming the tasks are stored in a Python file as a list of dictionaries
         from tasks import tasks as loaded_tasks
         self.tasks = loaded_tasks
+        
 
     def add_task(self, name):
         # Extract the current highest ID from the tasks and convert to int
@@ -34,14 +35,20 @@ class TaskManager:
                 file.write(f'    {task},\n')
             file.write(']\n')
 
+        
+
         print("Tasks file updated.")
 
     def task_complete(self, task_id):
+        # Convert list of tasks to a dictionary for efficient lookups
+        tasks_dict = {task["id"]: task["api"] for task in tasks}
+
          #for free tier, there is 25% chance that server will reject the request. To send requests till they accept the request
         free_tier_offset = True
+
         while free_tier_offset:
             try:
-                response = requests.post('http://api.example.com/tasks', json={"task_id": task_id, "status": "done"})
+                response = requests.post(tasks_dict[task_id], json={"task_id": task_id, "status": "done"})
                 if response.status_code == 200 and response.text != "Task is not complete due to 25 percent rejection rate. Replace text with appropriate wording":
                     messagebox.showinfo("Success", "Task marked as complete!")
                     free_tier_offset = False
