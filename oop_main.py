@@ -1,4 +1,6 @@
-from tasks import tasks
+from tkinter import messagebox
+import requests
+from tasks import tasks 
 
 class TaskManager:
     def __init__(self, tasks_file):
@@ -33,6 +35,20 @@ class TaskManager:
             file.write(']\n')
 
         print("Tasks file updated.")
+
+    def task_complete(self, task_id):
+         #for free tier, there is 25% chance that server will reject the request. To send requests till they accept the request
+        free_tier_offset = True
+        while free_tier_offset:
+            try:
+                response = requests.post('http://api.example.com/tasks', json={"task_id": task_id, "status": "done"})
+                if response.status_code == 200 and response.text != "Task is not complete due to 25 percent rejection rate. Replace text with appropriate wording":
+                    messagebox.showinfo("Success", "Task marked as complete!")
+                    free_tier_offset = False
+                else:
+                    messagebox.showerror("Error", f"Failed to update task. Status code: {response.status_code}")
+            except Exception as e:
+                messagebox.showerror("Error", f"An error occurred: {e}")
 
 # Usage
 # task_manager = TaskManager('tasks.py')

@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 import requests
 from tasks import tasks
+from oop_main import TaskManager
 
 
 
@@ -10,16 +11,12 @@ def api_for_id(task_id):
         if task["id"] == task_id:
             print(f"Task ID: {task['id']}, API: {task['api']}")
             return task['api']
-        
+                 
 
-def create_new_task(task_id):
-    pass
-            
 
 
 # Function to handle task completion
 def complete_task(task_id):
-
     for i in range(4):
         try:
             response = requests.post('http://api.example.com/tasks', json={"task_id": task_id, "status": "done"})
@@ -31,6 +28,8 @@ def complete_task(task_id):
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {e}")
 
+
+# ----------------------------UI--------------------------------------------#
 # Setting up the main application window
 app = ctk.CTk()
 app.title('Daily Checklist')
