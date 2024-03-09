@@ -8,3 +8,4 @@ Desktop application that uses pixela to keep track of habits
 - Delete Task
 - Settings menu
 - Viewing the grid on the app
+
